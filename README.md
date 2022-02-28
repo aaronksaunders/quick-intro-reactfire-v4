@@ -1,7 +1,9 @@
-# quick-intro-reactfire-v4
+# Quick Intro To ReactFire v4 Sample Application
 
+- ReactFire Repo - https://github.com/FirebaseExtended/reactfire
 - updated previously released reactfire intro application to work with v4
 - current has auth and create account, will add some CRUD functionality soon
+- used [Ionic Framework](https://ionicframework.com/docs/react) for UI but the code is react so it should work in all cases
 
 
 ### Two Approaches For Checking For Auth User
