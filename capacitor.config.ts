@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'dsfds',
+  appId: 'io.ionic.reactfirenew',
+  appName: 'reactfirenew',
   webDir: 'build',
   bundledWebRuntime: false
 };

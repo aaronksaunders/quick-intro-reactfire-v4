@@ -1,57 +1,44 @@
-import MessageListItem from '../components/MessageListItem';
-import { useState } from 'react';
-import { Message, getMessages } from '../data/messages';
 import {
+  IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
-  IonList,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter
-} from '@ionic/react';
-import './Home.css';
+} from "@ionic/react";
+import "./Home.css";
+import { useFirebaseApp } from "reactfire";
+import { getAuth, signOut } from "firebase/auth";
+import { useHistory } from "react-router";
 
 const Home: React.FC = () => {
-
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  useIonViewWillEnter(() => {
-    const msgs = getMessages();
-    setMessages(msgs);
-  });
-
-  const refresh = (e: CustomEvent) => {
-    setTimeout(() => {
-      e.detail.complete();
-    }, 3000);
-  };
+  const app = useFirebaseApp();
+  const auth = getAuth(app);
+  const history = useHistory();
 
   return (
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Inbox</IonTitle>
+          <IonTitle>HOME</IonTitle>
+          <IonButtons slot="end">
+            <IonButton
+              onClick={async () => {
+                await signOut(auth);
+                history.push("/login");
+                return true;
+              }}
+            >
+              SIGN OUT
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonRefresher slot="fixed" onIonRefresh={refresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
-
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">
-              Inbox
-            </IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
-        <IonList>
-          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
-        </IonList>
+        <pre>
+        {auth.currentUser ? JSON.stringify(auth.currentUser, null,2) : null}
+        </pre>
       </IonContent>
     </IonPage>
   );
