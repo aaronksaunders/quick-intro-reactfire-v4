@@ -4,9 +4,10 @@
 - current has auth and create account, will add some CRUD functionality soon
 
 
-## Two Approaches For Checking For Auth User
+### Two Approaches For Checking For Auth User
 
-From the react router documentation..
+From the react router documentation.. 
+> for this to work with IonicReactRouter, I had to remove the location from being passed in to the redirect as state. IonicRouter doesnt support Switch, so the thing just kept looping
 ```jsx
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
@@ -42,7 +43,7 @@ export const PrivateRoute = ({
 
 ```
 
-From the ReactFire Example Code, see this is in `AppAuthWrapper.tsx`
+From the ReactFire Example Code, see this is in `AppAuthWrapper.tsx`. The AuthWrapper code is from the [reactfire repo](https://github.com/FirebaseExtended/reactfire) to account for the removal of `AuthCheck` component
 ```jsx
 export const AuthWrapper = ({
   children,
