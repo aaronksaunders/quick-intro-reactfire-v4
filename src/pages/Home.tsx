@@ -26,8 +26,7 @@ const Home: React.FC = () => {
             <IonButton
               onClick={async () => {
                 await signOut(auth);
-                history.push("/login");
-                return true;
+                history.replace("/login");
               }}
             >
               SIGN OUT

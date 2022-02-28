@@ -38,7 +38,6 @@ import {
 } from "reactfire";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount";
-import React from "react";
 
 setupIonicReact();
 
@@ -62,15 +61,14 @@ const App: React.FC = () => {
         <FirestoreProvider sdk={firestoreDatabase}>
           <IonReactRouter>
             <IonRouterOutlet>
-              <PrivateRoute path="/home" exact={true}>
-                <Home />
-              </PrivateRoute>
-              <Route path="/login" exact={true}>
-                <Login />
-              </Route>
-              <Route path="/create-account" exact={true}>
-                <CreateAccount />
-              </Route>
+              <AuthWrapper fallback={<AuthRoute />}>
+                <Route path="/" exact={true}>
+                  <Redirect to="/home" />
+                </Route>
+                <Route path="/home" exact={true}>
+                  <Home />
+                </Route>
+              </AuthWrapper>
             </IonRouterOutlet>
           </IonReactRouter>
         </FirestoreProvider>
@@ -81,34 +79,37 @@ const App: React.FC = () => {
 
 export default App;
 
-// A wrapper for <Route> that redirects to the login
-// screen if you're not yet authenticated.
-export const PrivateRoute = ({
+const AuthRoute = () => {
+  return (
+    <Switch>
+      <Route path="/login" exact={true}>
+        <Login />
+      </Route>
+      <Route path="/create-account" exact={true}>
+        <CreateAccount />
+      </Route>
+      <Route path="*" exact={true}>
+        <Redirect to="/login" />
+      </Route>
+    </Switch>
+  );
+};
+
+export const AuthWrapper = ({
   children,
-  location,
-  ...rest
-}: React.PropsWithChildren<any>) => {
+  fallback,
+}: React.PropsWithChildren<{ fallback: JSX.Element }>): JSX.Element => {
   const { status, data: signInCheckResult } = useSigninCheck();
   console.log(signInCheckResult);
-  debugger;
+
+  if (!children) {
+    throw new Error("Children must be provided");
+  }
   if (status === "loading") {
     return <IonLoading isOpen={status === "loading"} />;
+  } else if (signInCheckResult.signedIn === true) {
+    return children as JSX.Element;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        signInCheckResult.signedIn === true ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-            }}
-          />
-        )
-      }
-    />
-  );
+  return fallback;
 };
