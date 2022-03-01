@@ -9,7 +9,9 @@ import {
 
 const firebaseConfig = {
   /* add your config object from the Firebase console */
-
+  apiKey: "AIzaSyBkqZmuBNdoqk4ENvRZG7vOIBQrsDgznGc",
+  authDomain: "reactfire-new.firebaseapp.com",
+  projectId: "reactfire-new",
 };
 
 

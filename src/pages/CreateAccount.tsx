@@ -66,6 +66,7 @@ const CreateAccount: React.FC = () => {
         <IonItem>
           <IonInput
             value={password}
+            type="password"
             placeholder="Enter Password"
             onIonChange={(e) => setPassword(e.detail.value!)}
           ></IonInput>

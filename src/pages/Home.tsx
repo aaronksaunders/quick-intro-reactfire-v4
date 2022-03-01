@@ -36,7 +36,7 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <pre>
-        {auth.currentUser ? JSON.stringify(auth.currentUser, null,2) : null}
+          {auth.currentUser ? JSON.stringify(auth.currentUser, null, 2) : null}
         </pre>
       </IonContent>
     </IonPage>

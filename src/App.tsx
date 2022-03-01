@@ -54,7 +54,6 @@ const App: React.FC = () => {
     connectFirestoreEmulator(firestoreDatabase, "localhost", 9000);
     connectAuthEmulator(auth, "http://localhost:9099");
   }
-  console.log(auth.currentUser);
 
   return (
     <IonApp>
@@ -62,6 +61,9 @@ const App: React.FC = () => {
         <FirestoreProvider sdk={firestoreDatabase}>
           <IonReactRouter>
             <IonRouterOutlet>
+              <Route path="/" exact={true}>
+                <Redirect to="/home" />
+              </Route>
               <PrivateRoute path="/home" exact={true}>
                 <Home />
               </PrivateRoute>
@@ -89,8 +91,6 @@ export const PrivateRoute = ({
   ...rest
 }: React.PropsWithChildren<any>) => {
   const { status, data: signInCheckResult } = useSigninCheck();
-  console.log(signInCheckResult);
-  debugger;
   if (status === "loading") {
     return <IonLoading isOpen={status === "loading"} />;
   }
