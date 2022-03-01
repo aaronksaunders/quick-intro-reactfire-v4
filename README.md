@@ -1,5 +1,5 @@
 # Quick Intro To ReactFire v4 Sample Application
-
+- Blog Post & Video - https://dev.to/aaronksaunders/intro-to-reactfire-v4-login-logout-create-account-and-protected-routes-37e5
 - ReactFire Repo - https://github.com/FirebaseExtended/reactfire
 - updated previously released reactfire intro application to work with v4
 - current has auth and create account, will add some CRUD functionality soon
