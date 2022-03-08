@@ -7,11 +7,15 @@ import {
   FirebaseAppProvider,
 } from "reactfire";
 
+// ionic stuff
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
 const firebaseConfig = {
   /* add your config object from the Firebase console */
   apiKey: "AIzaSyBkqZmuBNdoqk4ENvRZG7vOIBQrsDgznGc",
   authDomain: "reactfire-new.firebaseapp.com",
   projectId: "reactfire-new",
+  storageBucket: "reactfire-new.appspot.com"
 };
 
 
@@ -23,6 +27,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+defineCustomElements(window);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

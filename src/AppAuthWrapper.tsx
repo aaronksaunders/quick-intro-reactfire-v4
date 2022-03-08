@@ -27,7 +27,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
-import { connectAuthEmulator, getAuth } from "firebase/auth"; // Firebase v9+
+import { connectAuthEmulator, getAuth, indexedDBLocalPersistence, initializeAuth } from "firebase/auth"; // Firebase v9+
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore"; // Firebase v9+
 
 import {
@@ -44,7 +44,13 @@ setupIonicReact();
 const App: React.FC = () => {
   const app = useFirebaseApp();
   const firestoreDatabase = getFirestore(app);
-  const auth = getAuth(app);
+
+  const auth = initializeAuth(app, {
+    persistence: indexedDBLocalPersistence
+  });
+
+  // browser only
+  // const auth = getAuth(app);
 
   // Check for dev/test mode however your app tracks that.
   // `process.env.NODE_ENV` is a common React pattern

@@ -11,6 +11,7 @@ import "./Home.css";
 import { useFirebaseApp } from "reactfire";
 import { getAuth, signOut } from "firebase/auth";
 import { useHistory } from "react-router";
+import { ImageCapture } from "../components/ImageCapture";
 
 const Home: React.FC = () => {
   const app = useFirebaseApp();
@@ -34,7 +35,8 @@ const Home: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen  className="ion-padding">
+        <ImageCapture />
         <pre>
           {auth.currentUser ? JSON.stringify(auth.currentUser, null, 2) : null}
         </pre>

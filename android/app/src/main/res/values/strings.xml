@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">reactfirenew</string>
+    <string name="title_activity_main">reactfirenew</string>
+    <string name="package_name">io.ionic.reactfirenew</string>
+    <string name="custom_url_scheme">io.ionic.reactfirenew</string>
+</resources>

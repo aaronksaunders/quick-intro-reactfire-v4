@@ -67,3 +67,6 @@ export const AuthWrapper = ({
 };
 
 ```
+
+### Help
+ - Kill Open Ports `lsof -ti tcp:9000 | xargs kill -9`
